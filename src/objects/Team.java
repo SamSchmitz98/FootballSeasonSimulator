@@ -7,6 +7,7 @@ public class Team{
 	private String name;
 	private String abbreviation;
 	private int rank;
+	private Conference conference;
 	
 	public Team(String name){
 		this.name = name;
@@ -51,6 +52,24 @@ public class Team{
 		this.rank = Integer.parseInt(rank);
 	}
 	
+	public Conference getConference() {
+		return conference;
+	}
+	
+	public void setConference(Conference conference) {
+		if(this.conference != null) {
+			this.conference.removeTeam(this);
+		}
+		this.conference = conference;
+	}
+	
+	public void removeFromConference() {
+		if (conference != null) {
+			conference.removeTeam(this);
+		}
+		conference = null;
+	}
+	
 	public String toString() {
 		return name;
 	}
@@ -65,5 +84,9 @@ public class Team{
 		}
 		
 		return this.name.equals(((Team)o).getName());
+	}
+	
+	public boolean conferenceError() {
+		return !conference.contains(this);
 	}
 }

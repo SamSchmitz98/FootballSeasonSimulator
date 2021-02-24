@@ -9,7 +9,7 @@ public class Conference {
 	private String name;
 	private ArrayList<Team> teams;
 	
-	Conference(String name){
+	public Conference(String name){
 		this.name = name;
 		teams = new ArrayList<Team>();
 	}
@@ -35,8 +35,16 @@ public class Conference {
 			return -1;
 		}
 		teams.add(team);
-		Collections.sort(teams, new SortByName());
+		Collections.sort(teams, new SortTeamsByName());
 		return teams.indexOf(team);
+	}
+	
+	public boolean removeTeam(Team team) {
+		return teams.remove(team);
+	}
+	
+	public Team removeTeam(int team) {
+		return teams.remove(team);
 	}
 	
 	public ArrayList<Team> getTeams(){
@@ -46,5 +54,22 @@ public class Conference {
 	
 	public String toString() {
 		return name;
+	}
+	
+	public int size() {
+		return teams.size();
+	}
+	
+	public boolean contains(Team team) {
+		return teams.contains(team);
+	}
+	
+	public boolean memberError() {
+		for (Team team : teams) {
+			if (team.getConference() != this) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

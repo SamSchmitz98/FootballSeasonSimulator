@@ -1,2 +1,3 @@
 Abbreviation:ISU
 Rank:2
+Conference:Big 12
